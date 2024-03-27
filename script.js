@@ -1,12 +1,37 @@
-playGame();
+const rockBtn = document.createElement("button");
+rockBtn.textContent = "Rock"
+rockBtn.setAttribute("id", "rockBtn");
 
-function playGame(){
-    for (let i = 0; i < 5; i++) {
-        let playerInput = prompt("Make ur choice").toLowerCase();
-        let computerInput = getComputerChoice();
-        console.log("Computer played " + computerInput + ". You " + playRound(playerInput, computerInput));
+const paperBtn = document.createElement("button");
+paperBtn.textContent = "Paper"
+paperBtn.setAttribute("id", "paperBtn");
+
+const scissorBtn = document.createElement("button");
+scissorBtn.textContent = "Scissor"
+scissorBtn.setAttribute("id", "scissorBtn");
+
+const resultsDiv = document.createElement("div");
+
+const container = document.querySelector("#container");
+container.appendChild(rockBtn)
+container.appendChild(paperBtn)
+container.appendChild(scissorBtn)
+container.appendChild(resultsDiv)
+
+
+container.addEventListener("click", (event) => {
+    switch (event.target.id){
+        case 'rockBtn':
+            resultsDiv.textContent = playRound ('rock', getComputerChoice());
+            break;
+        case 'paperBtn':
+            playRound ('paper', getComputerChoice());
+            break;
+        case 'scissorBtn':
+            playRound ('scissor', getComputerChoice());
+            break;
     }
-}
+  });
 
 function getComputerChoice(){
     switch (Math.floor(Math.random() * 3)){
@@ -23,6 +48,7 @@ function getComputerChoice(){
 }
 
 function playRound(playerSelection, computerSelection) {
+    console.log(playerSelection + 'VS' + computerSelection);
     switch (playerSelection){
         case 'rock':
             return evaluateRock(computerSelection);
